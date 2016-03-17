@@ -30,6 +30,7 @@ public class CalculateListener implements ActionListener
 			double firstNumber, secondNumber, thirdNumber, fourthNumber = 0;
 			double monthlyPayment, totalInterest, interestPrinciple = 0;
 			double interestPrincipleRatio, interestYear, interestMonth, ammortization = 0;
+			double checkValue;
 			
 			try {
 				// get user input
@@ -38,8 +39,15 @@ public class CalculateListener implements ActionListener
 				thirdNumber = theView.getThirdNumber();
 				fourthNumber = theView.getFourthNumber();
 				
+				// get check value, check it has been selected
+				checkValue = getCheckValue();
+				if (checkValue < 0) {
+					theView.displayErrorMessage("Please check an option");
+					return;
+				}
+				
 				// calculate values
-				theModel.calculateMortgageValues(firstNumber, secondNumber, thirdNumber, fourthNumber);
+				theModel.calculateMortgageValues(firstNumber, secondNumber, thirdNumber, fourthNumber, checkValue);
 				
 				// get values
 				monthlyPayment = theModel.getMonthlyPayment();
@@ -74,6 +82,25 @@ public class CalculateListener implements ActionListener
 		{
 			theView.hideResults();
 			theView.showCalculator();
+			theView.resetCheckBoxes();
+		}
+		
+		/**
+		 * 
+		 * FIX
+		 * @return
+		 */
+		
+		public double getCheckValue()
+		{
+			if (theView.getCheckOne())
+				return 365.25;
+			else if (theView.getCheckTwo())
+				return 12.0;
+			else if (theView.getCheckThree())
+				return 2.0;
+			else
+				return -1.0;
 		}
 		
 		

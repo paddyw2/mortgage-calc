@@ -1,9 +1,6 @@
 import java.lang.Math;
 
 public class MortgageModel {
-
-	private final double COMP_FREQ = 2.0;
-	private final double PAY_FREQ = 12.0;
 	
 	private double interestFactor;
 	
@@ -16,18 +13,20 @@ public class MortgageModel {
 	private double ammortizationYears;
 	
 	private double compFreq;
+	private double payFreq;
 	
 	
 	public void calculateInterestFactor(double interestRate)
 	{
 		double rate = interestRate / 100.0;
-		interestFactor = Math.pow(((rate/compFreq)+1), (compFreq/PAY_FREQ)) - 1;
+		interestFactor = Math.pow(((rate/compFreq)+1), (compFreq/payFreq)) - 1;
 	}
 	
-	public void calculateMortgageValues(double monthlyPayments, double principle, double interestRate, double comp)
+	public void calculateMortgageValues(double monthlyPayments, double principle, double interestRate, double comp, double freq)
 	{
 		// mortgage calculations, set variables
 		compFreq = comp;
+		payFreq = freq;
 		calculateInterestFactor(interestRate);
 		// set variables
 		blendedMonthlyPayment = (principle * interestFactor) / (1 - (Math.pow((interestFactor + 1), (monthlyPayments*-1))));

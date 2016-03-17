@@ -7,7 +7,7 @@ public class MortgageView extends JFrame {
 	// field width constant
 	private final int FIELD_WIDTH = 15;
 	private final int FRAME_WIDTH = 250;
-	private final int FRAME_HEIGHT = 240;
+	private final int FRAME_HEIGHT = 350;
 	private final int LOCATION = 200;
 	
 	// calculator fields
@@ -28,9 +28,9 @@ public class MortgageView extends JFrame {
 	
 	// check boxes
 	private JLabel checkTitle = new JLabel("Choose Payment Schedule");
-	private JCheckBox checkOne = new JCheckBox("Monthly");
-	private JCheckBox checkTwo = new JCheckBox("Daily");
-	private JCheckBox checkThree = new JCheckBox("Weekly");
+	private JCheckBox checkOne = new JCheckBox("Daily");
+	private JCheckBox checkTwo = new JCheckBox("Monthly");
+	private JCheckBox checkThree = new JCheckBox("Semi-Annual");
 	
 	// panel
 	private JPanel myPanel;
@@ -50,8 +50,8 @@ public class MortgageView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setLocation(LOCATION,LOCATION);
-		Container container = getContentPane();
-		container.setLayout(new GridLayout());
+		//Container container = getContentPane();
+		myPanel.setLayout(new GridBagLayout());
 		// show calculator as initial view
 		showCalculator();
 	}
@@ -94,12 +94,12 @@ public class MortgageView extends JFrame {
 	{
 		setTextFieldValues();
 		setCalcButton("Calculate");
-		myPanel.add(firstField);
-		myPanel.add(secondField);
-		myPanel.add(thirdField);
-		myPanel.add(fourthField);
+		addItem(myPanel, firstField, 2, 4, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, secondField, 2, 6, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, thirdField, 2, 8, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, fourthField, 2, 10, 1, 1, GridBagConstraints.NORTH);
 		setUpButtonGroup();
-		myPanel.add(calculateButton);
+		addItem(myPanel, calculateButton, 2, 20, 1, 1, GridBagConstraints.NORTH);
 		refreshFrame();
 	}
 	
@@ -126,13 +126,13 @@ public class MortgageView extends JFrame {
 	public void showResults()
 	{
 		setCalcButton("Reset");
-		myPanel.add(resultOne);
-		myPanel.add(resultTwo);
-		myPanel.add(resultThree);
-		myPanel.add(resultFour);
-		myPanel.add(resultFive);
-		myPanel.add(resultSix);
-		myPanel.add(resultSeven);
+		addItem(myPanel, resultOne, 2, 4, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultTwo, 2, 6, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultThree, 2, 8, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultFour, 2, 10, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultFive, 2, 12, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultSix, 2, 14, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, resultSeven, 2, 16, 1, 1, GridBagConstraints.NORTH);
 		refreshFrame();
 	}
 	
@@ -146,6 +146,11 @@ public class MortgageView extends JFrame {
 		myPanel.remove(resultSix);
 		myPanel.remove(resultSeven);
 		refreshFrame();
+	}
+	
+	public void resetCheckBoxes()
+	{
+		buttonGroup.clearSelection();
 	}
 	
 	/**
@@ -192,6 +197,25 @@ public class MortgageView extends JFrame {
 	
 	/**
 	 * 
+	 * layout methods
+	 * 
+	 */
+	private void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
+	    GridBagConstraints gc = new GridBagConstraints();
+	    gc.gridx = x;
+	    gc.gridy = y;
+	    gc.gridwidth = width;
+	    gc.gridheight = height;
+	    gc.weightx = 100.0;
+	    gc.weighty = 100.0;
+	    gc.insets = new Insets(5, 5, 5, 5);
+	    gc.anchor = align;
+	    gc.fill = GridBagConstraints.NONE;
+	    p.add(c, gc);
+	  }
+	
+	/**
+	 * 
 	 * helper methods
 	 * 
 	 * set main button text value
@@ -224,16 +248,40 @@ public class MortgageView extends JFrame {
 	
 	public void setUpButtonGroup()
 	{
-		myPanel.add(checkTitle);
+		addItem(myPanel, checkTitle, 2, 12, 1, 1, GridBagConstraints.NORTH);
 		buttonGroup.add(checkOne);
 		buttonGroup.add(checkTwo);
 		buttonGroup.add(checkThree);
-		myPanel.add(checkOne);
-		myPanel.add(checkTwo);
-		myPanel.add(checkThree);
+		addItem(myPanel, checkOne, 2, 14, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, checkTwo, 2, 16, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, checkThree, 2, 18, 1, 1, GridBagConstraints.NORTH);
 		//this.add(buttonGroup);
 		refreshFrame();
 		
+	}
+	
+	public boolean getCheckOne()
+	{
+		if (checkOne.isSelected())
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getCheckTwo()
+	{
+		if (checkTwo.isSelected())
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean getCheckThree()
+	{
+		if (checkThree.isSelected())
+			return true;
+		else
+			return false;
 	}
 	
 	/**
