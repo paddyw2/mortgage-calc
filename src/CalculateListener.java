@@ -73,7 +73,7 @@ public class CalculateListener implements ActionListener
 			}
 			catch(NumberFormatException ex)
 			{
-				theView.displayErrorMessage("You need to enter three integers");
+				theView.displayErrorMessage("You need to enter four values");
 			}
 			
 		}
@@ -87,7 +87,7 @@ public class CalculateListener implements ActionListener
 		
 		/**
 		 * 
-		 * FIX
+		 * get checkbox values
 		 * @return
 		 */
 		

@@ -11,6 +11,7 @@ public class MortgageController {
 		this.theModel = theModel;
 		
 		this.theView.addCalculationListener(new CalculateListener(theView, theModel));
+		this.theView.addTextBoxListener(new TextBoxListener());
 	}
 
 }

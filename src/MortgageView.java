@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
 import javax.swing.*;
 
 public class MortgageView extends JFrame {
@@ -290,9 +292,17 @@ public class MortgageView extends JFrame {
 	 * 
 	 * @param listenerForCalcButton
 	 */
-	void addCalculationListener(ActionListener listenerForCalcButton)
+	public void addCalculationListener(ActionListener listenerForCalcButton)
 	{
 		calculateButton.addActionListener(listenerForCalcButton);
+	}
+	
+	public void addTextBoxListener(MouseListener listenForClick)
+	{
+		firstField.addMouseListener(listenForClick);
+		secondField.addMouseListener(listenForClick);
+		thirdField.addMouseListener(listenForClick);
+		fourthField.addMouseListener(listenForClick);
 	}
 	
 	/**
