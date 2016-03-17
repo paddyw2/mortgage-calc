@@ -27,19 +27,42 @@ public class CalculateListener implements ActionListener
 		
 		public void calculateTotal()
 		{
-			int firstNumber, secondNumber, thirdNumber = 0;
+			double firstNumber, secondNumber, thirdNumber, fourthNumber = 0;
+			double monthlyPayment, totalInterest, interestPrinciple = 0;
+			double interestPrincipleRatio, interestYear, interestMonth, ammortization = 0;
 			
 			try {
+				// get user input
 				firstNumber = theView.getFirstNumber();
 				secondNumber = theView.getSecondNumber();
 				thirdNumber = theView.getThirdNumber();
+				fourthNumber = theView.getFourthNumber();
 				
-				theModel.addTwoNumbers(firstNumber, secondNumber, thirdNumber);
-				theView.addCalcSolution();
-				theView.setCalcSolution(theModel.getCalculationValue());
+				// calculate values
+				theModel.calculateMortgageValues(firstNumber, secondNumber, thirdNumber, fourthNumber);
 				
+				// get values
+				monthlyPayment = theModel.getMonthlyPayment();
+				totalInterest = theModel.getInterestPaid();
+				interestPrinciple = theModel.getInterestPrinciple();
+				interestPrincipleRatio = theModel.getInterestPrincipleRatio();
+				interestYear = theModel.getInterestYear();
+				interestMonth = theModel.getInterestMonth();
+				ammortization = theModel.getAmmortization();
+
+				// set values
+				theView.setResultOne(monthlyPayment);
+				theView.setResultTwo(totalInterest);
+				theView.setResultThree(interestPrinciple);
+				theView.setResultFour(interestPrincipleRatio);
+				theView.setResultFive(interestYear);
+				theView.setResultSix(interestMonth);
+				theView.setResultSeven(ammortization);
+				
+				// update JFrame
+				theView.hideCalculator();
+				theView.showResults();	
 			}
-			
 			catch(NumberFormatException ex)
 			{
 				theView.displayErrorMessage("You need to enter three integers");
@@ -49,7 +72,8 @@ public class CalculateListener implements ActionListener
 		
 		public void resetCalculator()
 		{
-			theView.resetCalculator();
+			theView.hideResults();
+			theView.showCalculator();
 		}
 		
 		
