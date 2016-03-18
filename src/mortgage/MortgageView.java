@@ -8,10 +8,6 @@ import javax.swing.*;
 
 public class MortgageView extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	// field width constant
 	private final int FIELD_WIDTH = 15;
 	private final int FRAME_WIDTH = 250;
@@ -58,7 +54,6 @@ public class MortgageView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setLocation(LOCATION,LOCATION);
-		//Container container = getContentPane();
 		myPanel.setLayout(new GridBagLayout());
 		// show calculator as initial view
 		showCalculator();
