@@ -1,3 +1,5 @@
+package mortgage;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -6,6 +8,10 @@ import javax.swing.*;
 
 public class MortgageView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// field width constant
 	private final int FIELD_WIDTH = 15;
 	private final int FRAME_WIDTH = 250;
@@ -30,9 +36,9 @@ public class MortgageView extends JFrame {
 	
 	// check boxes
 	private JLabel checkTitle = new JLabel("Choose Payment Schedule");
-	private JCheckBox checkOne = new JCheckBox("Daily");
-	private JCheckBox checkTwo = new JCheckBox("Monthly");
-	private JCheckBox checkThree = new JCheckBox("Semi-Annual");
+	private JCheckBox checkOne = new JCheckBox("Weekly");
+	private JCheckBox checkTwo = new JCheckBox("Bi-Weekly");
+	private JCheckBox checkThree = new JCheckBox("Monthly");
 	
 	// panel
 	private JPanel myPanel;
@@ -284,6 +290,25 @@ public class MortgageView extends JFrame {
 			return true;
 		else
 			return false;
+	}
+	
+	public double getCheckValue()
+	{
+		if (getCheckOne())
+			return 52.0;
+		else if (getCheckTwo())
+			return 26.0;
+		else if (getCheckThree())
+			return 12.0;
+		else
+			return -1.0;
+	}
+	
+	public void resetCalculator()
+	{
+		hideResults();
+		showCalculator();
+		resetCheckBoxes();
 	}
 	
 	/**
