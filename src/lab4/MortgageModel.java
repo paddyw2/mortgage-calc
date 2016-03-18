@@ -1,4 +1,5 @@
-package mortgage;
+package lab4;
+
 import java.lang.Math;
 
 public class MortgageModel {

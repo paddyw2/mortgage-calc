@@ -1,4 +1,4 @@
-package mortgage;
+package lab4;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

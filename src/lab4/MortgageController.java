@@ -1,4 +1,4 @@
-package mortgage;
+package lab4;
 
 public class MortgageController {
 	private MortgageView theView;
