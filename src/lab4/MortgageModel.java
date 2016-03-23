@@ -80,5 +80,23 @@ public class MortgageModel {
 		return round(ammortizationYears);
 	}
 	
+	public Object[][] returnScheduleInfo()
+	{
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", payFreq},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10)}
+			};
+		
+		return data;
+	}
+	
 	
 }

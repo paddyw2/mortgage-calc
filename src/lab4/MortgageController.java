@@ -2,15 +2,36 @@ package lab4;
 
 public class MortgageController {
 	private MortgageView theView;
+	private MortgageViewTwo viewTwo;
 	private MortgageModel theModel;
 	
-	public MortgageController(MortgageView theView, MortgageModel theModel)
+	public MortgageController(MortgageView theView, MortgageModel theModel, MortgageViewTwo viewTwo)
 	{
 		this.theView = theView;
+		this.viewTwo = viewTwo;
 		this.theModel = theModel;
 		
 		this.theView.addCalculationListener(new CalculateListener(this));
 		this.theView.addTextBoxListener(new TextBoxListener());
+		
+		ScheduleListener scheduleListener = new ScheduleListener(this);
+		this.theView.addScheduleListener(scheduleListener);
+		this.viewTwo.addScheduleListener(scheduleListener);
+		
+		
+	}
+	
+	public void showMortgageSchedule()
+	{
+		Object[][] data = theModel.returnScheduleInfo();
+		viewTwo.setUpPanel();
+		viewTwo.setUpTable(data);
+		viewTwo.setVisible(true);
+	}
+	
+	public void hideMortgageSchedule()
+	{
+		viewTwo.setVisible(false);
 	}
 	
 	public void calculateTotal()

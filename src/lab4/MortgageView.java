@@ -13,7 +13,7 @@ public class MortgageView extends JFrame {
 	private final int FIELD_WIDTH = 15;
 	private final int FRAME_WIDTH = 250;
 	private final int FRAME_HEIGHT = 350;
-	private final int LOCATION = 200;
+	private final int LOCATION = 150;
 	
 	// calculator fields
 	private JTextField firstField = new JTextField(FIELD_WIDTH);
@@ -23,6 +23,7 @@ public class MortgageView extends JFrame {
 	private JButton calculateButton = new JButton();
 	
 	// result labels
+	private JLabel padding = new JLabel();
 	private JLabel resultOne = new JLabel();
 	private JLabel resultTwo = new JLabel();
 	private JLabel resultThree = new JLabel();
@@ -30,6 +31,7 @@ public class MortgageView extends JFrame {
 	private JLabel resultFive = new JLabel();
 	private JLabel resultSix = new JLabel();
 	private JLabel resultSeven = new JLabel();
+	private JButton scheduleButton = new JButton("View Schedule");
 	
 	// check boxes
 	private JLabel checkTitle = new JLabel("Choose Payment Schedule");
@@ -41,7 +43,6 @@ public class MortgageView extends JFrame {
 	private JPanel myPanel;
 	// button group
 	private ButtonGroup buttonGroup;
-	
 	/**
 	 * 
 	 * constructor that sets up initial view
@@ -55,6 +56,7 @@ public class MortgageView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setLocation(LOCATION,LOCATION);
+
 		myPanel.setLayout(new GridBagLayout());
 		// show calculator as initial view
 		showCalculator();
@@ -98,6 +100,7 @@ public class MortgageView extends JFrame {
 	{
 		setTextFieldValues();
 		setCalcButton("Calculate");
+		addItem(myPanel, padding, 2, 0, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, firstField, 2, 4, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, secondField, 2, 6, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, thirdField, 2, 8, 1, 1, GridBagConstraints.NORTH);
@@ -137,6 +140,7 @@ public class MortgageView extends JFrame {
 		addItem(myPanel, resultFive, 2, 12, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, resultSix, 2, 14, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, resultSeven, 2, 16, 1, 1, GridBagConstraints.NORTH);
+		addItem(myPanel, scheduleButton, 2, 18, 1, 1, GridBagConstraints.NORTH);
 		refreshFrame();
 	}
 	
@@ -149,6 +153,7 @@ public class MortgageView extends JFrame {
 		myPanel.remove(resultFive);
 		myPanel.remove(resultSix);
 		myPanel.remove(resultSeven);
+		myPanel.remove(scheduleButton);
 		refreshFrame();
 	}
 	
@@ -204,7 +209,7 @@ public class MortgageView extends JFrame {
 	 * layout methods
 	 * 
 	 */
-	private void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
+	public void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
 	    GridBagConstraints gc = new GridBagConstraints();
 	    gc.gridx = x;
 	    gc.gridy = y;
@@ -245,9 +250,13 @@ public class MortgageView extends JFrame {
 	public void setTextFieldValues()
 	{
 		firstField.setText("Ammortization, in Months");
+		firstField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		secondField.setText("Total Amount Loaned");
+		secondField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		thirdField.setText("Annual Interest Rate (%)");
+		thirdField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		fourthField.setText("Compound Frequency");
+		fourthField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 	}
 	
 	public void setUpButtonGroup()
@@ -316,6 +325,11 @@ public class MortgageView extends JFrame {
 	public void addCalculationListener(ActionListener listenerForCalcButton)
 	{
 		calculateButton.addActionListener(listenerForCalcButton);
+	}
+	
+	public void addScheduleListener(ActionListener scheduleListener)
+	{
+		scheduleButton.addActionListener(scheduleListener);
 	}
 	
 	public void addTextBoxListener(MouseListener listenForClick)
