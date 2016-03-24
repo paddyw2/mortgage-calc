@@ -44,7 +44,7 @@ public class MortgageScheduleView extends JFrame {
 	
 	public void setUpPanel()
 	{
-		title = new JLabel("Payment Schedule");
+		title = new JLabel("Yearly Payment Schedule");
 		title.setFont(new Font(Font.SANS_SERIF, 0, 16));
 		addItem(myPanel, title, 2, 0, 1, 1, GridBagConstraints.NORTH);
 

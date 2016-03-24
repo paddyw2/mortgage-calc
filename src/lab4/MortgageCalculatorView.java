@@ -3,7 +3,8 @@ package lab4;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.event.FocusListener;
+import java.awt.event.WindowFocusListener;
 
 import javax.swing.*;
 
@@ -60,6 +61,8 @@ public class MortgageCalculatorView extends JFrame {
 		myPanel.setLayout(new GridBagLayout());
 		// show calculator as initial view
 		showCalculator();
+		
+		//calculateButton.grabFocus();
 	}
 	
 	/**
@@ -249,12 +252,19 @@ public class MortgageCalculatorView extends JFrame {
 
 	public void setTextFieldValues()
 	{
+		firstField.setName("firstField");
 		firstField.setText("Ammortization, in Months");
 		firstField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		
+		secondField.setName("secondField");
 		secondField.setText("Total Amount Loaned");
 		secondField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		
+		thirdField.setName("thirdField");
 		thirdField.setText("Annual Interest Rate (%)");
 		thirdField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		
+		fourthField.setName("fourthField");
 		fourthField.setText("Compound Frequency");
 		fourthField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 	}
@@ -316,6 +326,11 @@ public class MortgageCalculatorView extends JFrame {
 		resetCheckBoxes();
 	}
 	
+	public void setButtonFocus()
+	{
+		calculateButton.requestFocusInWindow();
+	}
+	
 	/**
 	 * 
 	 * add action listener to button
@@ -332,12 +347,17 @@ public class MortgageCalculatorView extends JFrame {
 		scheduleButton.addActionListener(scheduleListener);
 	}
 	
-	public void addTextBoxListener(MouseListener listenForClick)
+	public void addFocusListener(FocusListener listenForFocus)
 	{
-		firstField.addMouseListener(listenForClick);
-		secondField.addMouseListener(listenForClick);
-		thirdField.addMouseListener(listenForClick);
-		fourthField.addMouseListener(listenForClick);
+		firstField.addFocusListener(listenForFocus);
+		secondField.addFocusListener(listenForFocus);
+		thirdField.addFocusListener(listenForFocus);
+		fourthField.addFocusListener(listenForFocus);
+	}
+	
+	public void addWinFocusListener(WindowFocusListener windowListener)
+	{
+		this.addWindowFocusListener(windowListener);
 	}
 	
 	/**

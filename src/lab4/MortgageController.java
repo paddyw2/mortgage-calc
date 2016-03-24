@@ -11,8 +11,12 @@ public class MortgageController {
 		this.scheduleView = scheduleView;
 		this.theModel = theModel;
 		
+		// set up action listeners
+		
 		this.calcView.addCalculationListener(new CalculateListener(this));
-		this.calcView.addTextBoxListener(new TextBoxListener());
+
+		this.calcView.addFocusListener(new TextFocusListener());
+		this.calcView.addWinFocusListener(new WindowListener(this));
 		
 		ScheduleListener scheduleListener = new ScheduleListener(this);
 		this.calcView.addScheduleListener(scheduleListener);
@@ -37,6 +41,11 @@ public class MortgageController {
 	public void hideMortgageSchedule()
 	{
 		scheduleView.setVisible(false);
+	}
+	
+	public void setButtonFocus()
+	{
+		calcView.setButtonFocus();
 	}
 	
 	public void calculateTotal()
