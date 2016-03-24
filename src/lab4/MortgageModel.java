@@ -17,6 +17,9 @@ public class MortgageModel {
 	private double compFreq;
 	private double payFreq;
 	
+	private double principle;
+	private double interestRate;
+	
 	
 	public void calculateInterestFactor(double interestRate)
 	{
@@ -27,6 +30,8 @@ public class MortgageModel {
 	public void calculateMortgageValues(double monthlyPayments, double principle, double interestRate, double comp, double freq)
 	{
 		// mortgage calculations, set variables
+		this.principle = principle;
+		this.interestRate = interestRate;
 		compFreq = comp;
 		payFreq = freq;
 		calculateInterestFactor(interestRate);
@@ -82,18 +87,47 @@ public class MortgageModel {
 	
 	public Object[][] returnScheduleInfo()
 	{
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", payFreq},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10)}
-			};
+		Object[][] data = new String[(int)ammortizationYears+1][4];
+		double currentTotal = principle;
+		double totalPaid = 0;
+		double blended = getMonthlyPayment();
+		double paidPerYear = blended * 12;
+		double principlePortion = 0;
+		double interest = 0;
+		
+		for(int i=0;i<(ammortizationYears + 1);i++) {
+			//totalPaid = principle - (getMonthlyPayment()*((i+1)*12));
+			
+			System.out.println(currentTotal);
+			System.out.println(i);
+			
+			
+			interest = currentTotal * (interestRate / 100);
+			
+			System.out.println(interest);
+			
+	
+			
+			if (i == ammortizationYears) {
+				principlePortion = currentTotal;
+				totalPaid = totalPaid + principlePortion;
+				currentTotal = currentTotal - principlePortion;
+			} else {
+				principlePortion = paidPerYear - interest;
+				totalPaid = totalPaid + principlePortion;
+				currentTotal = currentTotal - principlePortion;
+				
+			}
+				
+			
+			data[i][0] = String.valueOf("$" + round(blended));
+			data[i][1] = String.valueOf("$" + round(interest));
+			data[i][2] = String.valueOf("$" + round(principlePortion));
+			data[i][3] = String.valueOf("$" + round(currentTotal));
+			
+			
+			
+		}
 		
 		return data;
 	}

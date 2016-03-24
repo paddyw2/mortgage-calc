@@ -1,22 +1,22 @@
 package lab4;
 
 public class MortgageController {
-	private MortgageView theView;
-	private MortgageViewTwo viewTwo;
+	private MortgageCalculatorView calcView;
+	private MortgageScheduleView scheduleView;
 	private MortgageModel theModel;
 	
-	public MortgageController(MortgageView theView, MortgageModel theModel, MortgageViewTwo viewTwo)
+	public MortgageController(MortgageCalculatorView calcView, MortgageModel theModel, MortgageScheduleView scheduleView)
 	{
-		this.theView = theView;
-		this.viewTwo = viewTwo;
+		this.calcView = calcView;
+		this.scheduleView = scheduleView;
 		this.theModel = theModel;
 		
-		this.theView.addCalculationListener(new CalculateListener(this));
-		this.theView.addTextBoxListener(new TextBoxListener());
+		this.calcView.addCalculationListener(new CalculateListener(this));
+		this.calcView.addTextBoxListener(new TextBoxListener());
 		
 		ScheduleListener scheduleListener = new ScheduleListener(this);
-		this.theView.addScheduleListener(scheduleListener);
-		this.viewTwo.addScheduleListener(scheduleListener);
+		this.calcView.addScheduleListener(scheduleListener);
+		this.scheduleView.addScheduleListener(scheduleListener);
 		
 		
 	}
@@ -24,14 +24,14 @@ public class MortgageController {
 	public void showMortgageSchedule()
 	{
 		Object[][] data = theModel.returnScheduleInfo();
-		viewTwo.setUpPanel();
-		viewTwo.setUpTable(data);
-		viewTwo.setVisible(true);
+
+		scheduleView.updateTable(data);
+		scheduleView.setVisible(true);
 	}
 	
 	public void hideMortgageSchedule()
 	{
-		viewTwo.setVisible(false);
+		scheduleView.setVisible(false);
 	}
 	
 	public void calculateTotal()
@@ -43,15 +43,15 @@ public class MortgageController {
 		
 		try {
 			// get user input
-			firstNumber = theView.getFirstNumber();
-			secondNumber = theView.getSecondNumber();
-			thirdNumber = theView.getThirdNumber();
-			fourthNumber = theView.getFourthNumber();
+			firstNumber = calcView.getFirstNumber();
+			secondNumber = calcView.getSecondNumber();
+			thirdNumber = calcView.getThirdNumber();
+			fourthNumber = calcView.getFourthNumber();
 			
 			// get check value, check it has been selected
-			checkValue = theView.getCheckValue();
+			checkValue = calcView.getCheckValue();
 			if (checkValue < 0) {
-				theView.displayErrorMessage("Please check an option");
+				calcView.displayErrorMessage("Please check an option");
 				return;
 			}
 			
@@ -68,29 +68,29 @@ public class MortgageController {
 			ammortization = theModel.getAmmortization();
 
 			// set values
-			theView.setResultOne(monthlyPayment);
-			theView.setResultTwo(totalInterest);
-			theView.setResultThree(interestPrinciple);
-			theView.setResultFour(interestPrincipleRatio);
-			theView.setResultFive(interestYear);
-			theView.setResultSix(interestMonth);
-			theView.setResultSeven(ammortization);
+			calcView.setResultOne(monthlyPayment);
+			calcView.setResultTwo(totalInterest);
+			calcView.setResultThree(interestPrinciple);
+			calcView.setResultFour(interestPrincipleRatio);
+			calcView.setResultFive(interestYear);
+			calcView.setResultSix(interestMonth);
+			calcView.setResultSeven(ammortization);
 			
 			// update JFrame
-			theView.hideCalculator();
-			theView.showResults();	
+			calcView.hideCalculator();
+			calcView.showResults();	
 		}
 		catch(NumberFormatException ex)
 		{
-			theView.displayErrorMessage("You need to enter four values");
-			theView.resetCalculator();
+			calcView.displayErrorMessage("You need to enter four values");
+			calcView.resetCalculator();
 		}
 		
 	}
 	
 	public void resetCalculator()
 	{
-		theView.resetCalculator();
+		calcView.resetCalculator();
 	}
 
 }

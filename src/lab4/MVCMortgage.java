@@ -4,12 +4,12 @@ public class MVCMortgage {
 
 	public static void main(String[] args)
 	{
-		MortgageView theView = new MortgageView();
-		MortgageViewTwo viewTwo = new MortgageViewTwo();
+		MortgageCalculatorView calcView = new MortgageCalculatorView();
+		MortgageScheduleView scheduleView = new MortgageScheduleView();
 		MortgageModel theModel = new MortgageModel();
 		
-		MortgageController theController = new MortgageController(theView, theModel, viewTwo);
+		MortgageController theController = new MortgageController(calcView, theModel, scheduleView);
 		
-		theView.setVisible(true);
+		calcView.setVisible(true);
 	}
 }

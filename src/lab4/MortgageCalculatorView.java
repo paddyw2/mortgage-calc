@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-public class MortgageView extends JFrame {
+public class MortgageCalculatorView extends JFrame {
 
 	// field width constant
 	private final int FIELD_WIDTH = 15;
@@ -48,7 +48,7 @@ public class MortgageView extends JFrame {
 	 * constructor that sets up initial view
 	 * 
 	 */
-	public MortgageView()
+	public MortgageCalculatorView()
 	{	
 		super("Mortgage Calculator");
 		myPanel = new JPanel();

@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
-public class MortgageViewTwo extends JFrame {
+public class MortgageScheduleView extends JFrame {
 	
 	private final int FRAME_WIDTH = 800;
 	private final int FRAME_HEIGHT = 300;
@@ -13,14 +15,19 @@ public class MortgageViewTwo extends JFrame {
 	private final int LOCATIONY = 150;
 	
 	private JPanel myPanel;
-	private JPanel closePanel;
 	private JScrollPane scrollpane;
+	private JPanel tablePanel;
 	
 	private JLabel title;
 	private JTable table;
 	private JButton closeButton;
 	
-	public MortgageViewTwo()
+	private String[] columnNames = {"Blended Payment Amount",
+            "Interest Component",
+            "Principal Component",
+            "New Balance Owing"};
+	
+	public MortgageScheduleView()
 	{	
 		super("Mortgage Schedule");
 		myPanel = new JPanel();
@@ -32,8 +39,7 @@ public class MortgageViewTwo extends JFrame {
 		myPanel.setLayout(new GridBagLayout());
 		
 		setUpPanel();
-
-		
+		setUpTable();
 	}
 	
 	public void setUpPanel()
@@ -46,30 +52,41 @@ public class MortgageViewTwo extends JFrame {
 		addItem(myPanel, closeButton, 2, 10, 1, 1, GridBagConstraints.NORTH);
 		
 		scrollpane = new JScrollPane(myPanel);
+		scrollpane.setBorder(null);
 	    getContentPane().add(scrollpane);
 	}
 	
-	public void setUpTable(Object[][] data)
+	public void setUpTable()
 	{	
-		String[] columnNames = {"Blended Payment Amount",
-                "Interest Component",
-                "Principal Component",
-                "New Balance Owing"};
+		Object[][] data = {{"",""}};
 		
 		table = new JTable(data, columnNames);
 		
 		table.getTableHeader().setFont(new Font(Font.SANS_SERIF, 0, 13));
-		table.setRowMargin(10);
-		table.setRowHeight(40);
+		table.setFont(new Font(Font.SANS_SERIF, 0, 13));
+		table.setRowHeight(20);
+		table.getColumnModel().setColumnMargin(10);
 		
-		for (int i=0; i<4; i++) {
-			table.getColumnModel().getColumn(i).setPreferredWidth(175);
-		}
-		
-		addItem(myPanel, table.getTableHeader(), 2, 2, 1, 1, GridBagConstraints.NORTH);
-		addItem(myPanel, table, 2, 3, 1, 1, GridBagConstraints.NORTH);
+		tablePanel = new JPanel();
+		tablePanel.setLayout(new GridBagLayout());
 
-		refreshFrame();
+	}
+	
+	public void updateTable(Object[][] data)
+	{
+			TableModel model = new DefaultTableModel(data, columnNames);
+			myPanel.remove(table);
+			table.setModel(model);
+			for (int i=0; i<4; i++) {
+				table.getColumnModel().getColumn(i).setPreferredWidth(175);
+			}
+			
+			addItem(tablePanel, table.getTableHeader(), 2, 0, 1, 1, GridBagConstraints.NORTH);
+			addItem(tablePanel, table, 2, 1, 1, 1, GridBagConstraints.NORTH);
+			
+			addItem(myPanel, tablePanel, 2, 2, 1, 1, GridBagConstraints.NORTH);
+			
+			refreshFrame();
 	}
 	
 	public void addScheduleListener(ActionListener scheduleListener)
