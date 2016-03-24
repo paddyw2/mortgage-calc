@@ -95,6 +95,11 @@ public class MortgageModel {
 		double principlePortion = 0;
 		double interest = 0;
 		
+		if (ammortizationYears < 1) {
+			data[0][0] = "Error";
+			return data;
+		}
+		
 		for(int i=0;i<(ammortizationYears + 1);i++) {
 			//totalPaid = principle - (getMonthlyPayment()*((i+1)*12));
 			

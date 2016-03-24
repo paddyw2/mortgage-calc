@@ -24,7 +24,12 @@ public class MortgageController {
 	public void showMortgageSchedule()
 	{
 		Object[][] data = theModel.returnScheduleInfo();
-
+		
+		if (data[0][0].equals("Error")) {
+			calcView.displayErrorMessage("Ammortization period not long enough for schedule");
+			return;
+		}
+		
 		scheduleView.updateTable(data);
 		scheduleView.setVisible(true);
 	}
