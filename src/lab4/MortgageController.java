@@ -18,6 +18,8 @@ public class MortgageController {
 		this.calcView.addFocusListener(new TextFocusListener());
 		this.calcView.addWinFocusListener(new WindowListener(this));
 		
+		this.scheduleView.addScheduleViewListener(new ScheduleViewListener(this));
+		
 		ScheduleListener scheduleListener = new ScheduleListener(this);
 		this.calcView.addScheduleListener(scheduleListener);
 		this.scheduleView.addScheduleListener(scheduleListener);
@@ -27,7 +29,7 @@ public class MortgageController {
 	
 	public void showMortgageSchedule()
 	{
-		Object[][] data = theModel.returnScheduleInfo();
+		Object[][] data = theModel.returnScheduleInfo(true);
 		
 		if (data[0][0].equals("Error")) {
 			calcView.displayErrorMessage("Ammortization period not long enough for schedule");
@@ -41,6 +43,32 @@ public class MortgageController {
 	public void hideMortgageSchedule()
 	{
 		scheduleView.setVisible(false);
+	}
+	
+	public void changeScheduleMonth()
+	{
+		Object[][] data = theModel.returnScheduleInfo(false);
+		if (data[0][0].equals("Error")) {
+			calcView.displayErrorMessage("Ammortization period not long enough for schedule");
+			return;
+		}
+		scheduleView.updateButton();
+		scheduleView.updateTable(data);
+		scheduleView.setVisible(true);
+		
+	}
+	
+	public void changeScheduleYear()
+	{
+		Object[][] data = theModel.returnScheduleInfo(true);
+		if (data[0][0].equals("Error")) {
+			calcView.displayErrorMessage("Ammortization period not long enough for schedule");
+			return;
+		}
+		scheduleView.updateButton();
+		scheduleView.updateTable(data);
+		scheduleView.setVisible(true);
+		
 	}
 	
 	public void setButtonFocus()

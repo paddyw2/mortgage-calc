@@ -22,6 +22,8 @@ public class MortgageScheduleView extends JFrame {
 	private JTable table;
 	private JButton closeButton;
 	
+	private JButton toggleView;
+	
 	private String[] columnNames = {"Blended Payment Amount",
             "Interest Component",
             "Principal Component",
@@ -42,14 +44,25 @@ public class MortgageScheduleView extends JFrame {
 		setUpTable();
 	}
 	
+	public void updateButton()
+	{
+		if(toggleView.getText().equals("View by Month"))
+			toggleView.setText("View by Year");
+		else
+			toggleView.setText("View by Month");
+	}
+	
 	public void setUpPanel()
 	{
-		title = new JLabel("Yearly Payment Schedule");
+		title = new JLabel("Mortgage Payment Schedule");
 		title.setFont(new Font(Font.SANS_SERIF, 0, 16));
 		addItem(myPanel, title, 2, 0, 1, 1, GridBagConstraints.NORTH);
 
 		closeButton = new JButton("Close");
 		addItem(myPanel, closeButton, 2, 10, 1, 1, GridBagConstraints.NORTH);
+		
+		toggleView = new JButton("View by Month");
+		addItem(myPanel, toggleView, 2, 3, 1, 1, GridBagConstraints.NORTH);
 		
 		scrollpane = new JScrollPane(myPanel);
 		scrollpane.setBorder(null);
@@ -81,10 +94,10 @@ public class MortgageScheduleView extends JFrame {
 				table.getColumnModel().getColumn(i).setPreferredWidth(175);
 			}
 			
-			addItem(tablePanel, table.getTableHeader(), 2, 0, 1, 1, GridBagConstraints.NORTH);
-			addItem(tablePanel, table, 2, 1, 1, 1, GridBagConstraints.NORTH);
+			addItem(tablePanel, table.getTableHeader(), 2, 4, 1, 1, GridBagConstraints.NORTH);
+			addItem(tablePanel, table, 2, 5, 1, 1, GridBagConstraints.NORTH);
 			
-			addItem(myPanel, tablePanel, 2, 2, 1, 1, GridBagConstraints.NORTH);
+			addItem(myPanel, tablePanel, 2, 5, 1, 1, GridBagConstraints.NORTH);
 			
 			refreshFrame();
 	}
@@ -92,6 +105,11 @@ public class MortgageScheduleView extends JFrame {
 	public void addScheduleListener(ActionListener scheduleListener)
 	{
 		closeButton.addActionListener(scheduleListener);
+	}
+	
+	public void addScheduleViewListener(ActionListener scheduleListener)
+	{
+		toggleView.addActionListener(scheduleListener);
 	}
 	
 	public void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {

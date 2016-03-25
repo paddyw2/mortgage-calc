@@ -18,7 +18,8 @@ public class MortgageModel {
 	private double payFreq;
 	
 	private double principle;
-	private double interestRate;
+	
+	private double monthlyPayments;
 	
 	
 	public void calculateInterestFactor(double interestRate)
@@ -27,11 +28,11 @@ public class MortgageModel {
 		interestFactor = Math.pow(((rate/compFreq)+1), (compFreq/payFreq)) - 1;
 	}
 	
-	public void calculateMortgageValues(double monthlyPayments, double principle, double interestRate, double comp, double freq)
+	public void calculateMortgageValues(double payMonths, double principle, double interestRate, double comp, double freq)
 	{
 		// mortgage calculations, set variables
+		monthlyPayments = payMonths;
 		this.principle = principle;
-		this.interestRate = interestRate;
 		compFreq = comp;
 		payFreq = freq;
 		calculateInterestFactor(interestRate);
@@ -85,56 +86,61 @@ public class MortgageModel {
 		return round(ammortizationYears);
 	}
 	
-	public Object[][] returnScheduleInfo()
+	public Object[][] returnScheduleInfo(boolean perYear)
 	{
-		Object[][] data = new String[(int)ammortizationYears+1][4];
+		double roundYears = Math.ceil(ammortizationYears);
+		
+		Object[][] mainData = new String[(int)(roundYears*12)+1][4];
+		Object[][] yearlyData = new String[(int)(roundYears)+1][4];
 		double currentTotal = principle;
 		double totalPaid = 0;
 		double blended = getMonthlyPayment();
-		double paidPerYear = blended * 12;
 		double principlePortion = 0;
-		double interest = 0;
+		double interest, yearlyPrinciple, yearlyInterest = 0;
 		
-		if (ammortizationYears < 1) {
-			data[0][0] = "Error";
-			return data;
+		if (roundYears < 1) {
+			mainData[0][0] = "Error";
+			return mainData;
 		}
 		
-		for(int i=0;i<(ammortizationYears + 1);i++) {
-			//totalPaid = principle - (getMonthlyPayment()*((i+1)*12));
+		for(int i=0;i<((roundYears*12));i++) {
 			
-			System.out.println(currentTotal);
-			System.out.println(i);
+			System.out.println(i+1);
 			
+			interest = currentTotal * interestFactor;
+
+			principlePortion = blended - interest;
 			
-			interest = currentTotal * (interestRate / 100);
-			
-			System.out.println(interest);
-			
-	
-			
-			if (i == ammortizationYears) {
+			if ((currentTotal - principlePortion) <= 0)
 				principlePortion = currentTotal;
-				totalPaid = totalPaid + principlePortion;
-				currentTotal = currentTotal - principlePortion;
-			} else {
-				principlePortion = paidPerYear - interest;
-				totalPaid = totalPaid + principlePortion;
-				currentTotal = currentTotal - principlePortion;
+			
+			totalPaid = totalPaid + principlePortion;
+			currentTotal = currentTotal - principlePortion;
+
+			
+			mainData[i][0] = String.valueOf("$" + round(blended));
+			mainData[i][1] = String.valueOf("$" + round(interest));
+			mainData[i][2] = String.valueOf("$" + round(principlePortion));
+			mainData[i][3] = String.valueOf("$" + round(currentTotal));
+			
+			yearlyInterest = yearlyInterest + interest;
+			yearlyPrinciple = (blended * 12) - yearlyInterest;
+			
+			if (((i+1)%12 == 0 && i > 0)) {
+				yearlyData[((i+1)/12) - 1][0] = String.valueOf("$" + round(blended));
+				yearlyData[((i+1)/12) - 1][1] = String.valueOf("$" + round(yearlyInterest));
+				yearlyData[((i+1)/12) - 1][2] = String.valueOf("$" + round(yearlyPrinciple));
+				yearlyData[((i+1)/12) - 1][3] = String.valueOf("$" + round(currentTotal));
+				
+				yearlyInterest = 0;
 				
 			}
-				
-			
-			data[i][0] = String.valueOf("$" + round(blended));
-			data[i][1] = String.valueOf("$" + round(interest));
-			data[i][2] = String.valueOf("$" + round(principlePortion));
-			data[i][3] = String.valueOf("$" + round(currentTotal));
-			
-			
-			
 		}
 		
-		return data;
+		if(perYear)
+			return yearlyData;
+		else
+			return mainData;
 	}
 	
 	
