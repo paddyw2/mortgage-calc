@@ -48,11 +48,9 @@ public class MortgageController {
 		// if amortization less than 12 months, show monthly by default
 		if (data[0][0].equals("Error")) {
 			changeScheduleMonth();
-			return;
+		} else {
+			changeScheduleYear();
 		}
-		
-		scheduleView.updateTable(data);
-		scheduleView.setVisible(true);
 	}
 	
 	// hides the mortgage schedule window
@@ -65,15 +63,15 @@ public class MortgageController {
 	public void changeScheduleMonth()
 	{
 		Object[][] data = theModel.returnScheduleInfo(false);
+		// should never occur, but check for error just in case
 		if (data[0][0].equals("Error")) {
-			scheduleView.displayErrorMessage("An error has occured");
+			System.out.println("An error has occured in changeScheduleMonth()");
 			return;
 		}
 		scheduleView.updateDuration();
 		scheduleView.updateButton();
 		scheduleView.updateTable(data);
 		scheduleView.setVisible(true);
-		
 	}
 	
 	// updates the mortgage schedule table to display a yearly view
@@ -89,7 +87,6 @@ public class MortgageController {
 		scheduleView.updateButton();
 		scheduleView.updateTable(data);
 		scheduleView.setVisible(true);
-		
 	}
 	
 	// sets the focus on the calculate button, triggered when

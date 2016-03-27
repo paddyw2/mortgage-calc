@@ -339,7 +339,7 @@ public class MortgageCalculatorView extends JFrame {
 	}
 	
 	// display a JOptionPane error message
-	void displayErrorMessage(String errorMessage)
+	public void displayErrorMessage(String errorMessage)
 	{
 		JOptionPane.showMessageDialog(this, errorMessage);
 	}

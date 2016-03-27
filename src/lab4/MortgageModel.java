@@ -50,11 +50,11 @@ public class MortgageModel {
 	 * The method does not return any value, but once it has been called, the model will now hold the
 	 * users latest mortgage payment information
 	 */
-	public void calculateMortgageValues(double payMonths, double principle, double interestRate, double comp, double freq)
+	public void calculateMortgageValues(double payMonths, double principleAmount, double interestRate, double comp, double freq)
 	{
 		// set variables to parameter values
 		monthlyPayments = payMonths;
-		this.principle = principle;
+		principle = principleAmount;
 		compFreq = comp;
 		payFreq = freq;
 		calculateInterestFactor(interestRate);
@@ -68,14 +68,13 @@ public class MortgageModel {
 		amortizationYears = monthlyPayments / 12.0;
 	}
 	
-	
-	
-	// return rounded values
+	// round a double value to two decimal places
 	public double round(double value)
 	{
 		return (Math.round(value * 100.0) / 100.0);
 	}
 	
+	// return mortgage values, rounded to two decimal places
 	public double getMonthlyPayment()
 	{
 		return round(blendedMonthlyPayment);
@@ -110,6 +109,7 @@ public class MortgageModel {
 	{
 		return round(amortizationYears);
 	}
+	
 	/**
 	 * <h1>Generate Monthly and Yearly Payment Schedule</h1>
 	 * 
