@@ -16,7 +16,13 @@ import javax.swing.JTextField;
 
 public class TextFocusListener implements FocusListener {
 
-	// clear the text field on focus
+	/**
+	 * <h1>Clear Text Field on Focus</h1>
+	 * 
+	 * If a text field is selected or focused on, clear
+	 * the default helper text
+	 * 
+	 */
 	@Override
 	public void focusGained(FocusEvent arg0) {
 		JTextField source = (JTextField) arg0.getSource();
@@ -27,8 +33,13 @@ public class TextFocusListener implements FocusListener {
 		}
 	}
 
-	// on focus lost, check if the user entered a non-double value
-	// and if so, set the field text to the default helper text
+	/**
+	 * <h1>On Focus Lost, Check Field Value Validity</h1>
+	 * 
+	 * on focus lost, check if the user entered a non-double value
+	 * and if so, set the field text to the default helper text
+	 * 
+	 */
 	@Override
 	public void focusLost(FocusEvent arg0) {
 		JTextField source = (JTextField) arg0.getSource();

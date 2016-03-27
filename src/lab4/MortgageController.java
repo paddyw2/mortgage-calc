@@ -19,9 +19,17 @@ public class MortgageController {
 	private MortgageModel theModel;
 	
 	// Constructor
-	// takes the two views and the model as parameters and sets them as variables
-	// it also then creates the necessary listeners and adds them to the appropriate
-	// components in each of the two views
+	/**
+	 * <h1>Constructor</h1>
+	 * 
+	 * takes the two views and the model as parameters and sets them as variables
+	 * it also then creates the necessary listeners and adds them to the appropriate
+	 * components in each of the two views
+	 * 
+	 * @param calcView
+	 * @param theModel
+	 * @param scheduleView
+	 */
 	public MortgageController(MortgageCalculatorView calcView, MortgageModel theModel, MortgageScheduleView scheduleView)
 	{
 		this.calcView = calcView;
@@ -41,6 +49,14 @@ public class MortgageController {
 	
 	// gets the latest mortgage schedule data from the model, and passes
 	// it to the mortgage schedule view to be updated
+	/**
+	 * <h1>Show Initial Mortgage Schedule</h1>
+	 * 
+	 * This method shows the first mortgage schedule view. The default is a yearly
+	 * view but if there is not enough information, then that is changed to a
+	 * monthly view
+	 * 
+	 */
 	public void showMortgageSchedule()
 	{
 		Object[][] data = theModel.returnScheduleInfo(true);
@@ -54,12 +70,27 @@ public class MortgageController {
 	}
 	
 	// hides the mortgage schedule window
+	/**
+	 * <h1>Hide Mortgage Schedule View</h1>
+	 * 
+	 * Set mortgage schedule view visibility to false
+	 * 
+	 */
 	public void hideMortgageSchedule()
 	{
 		scheduleView.setVisible(false);
 	}
 	
 	// updates the mortgage schedule table to display a monthly view
+	/**
+	 * 
+	 * <h1>Change Schedule View to Monthly</h1>
+	 * 
+	 * Get the latest monthly schedule data from the model and update
+	 * the table in schedule view to display this information. Also toggles
+	 * the buttons and table header to reflect the change.
+	 * 
+	 */
 	public void changeScheduleMonth()
 	{
 		Object[][] data = theModel.returnScheduleInfo(false);
@@ -75,6 +106,15 @@ public class MortgageController {
 	}
 	
 	// updates the mortgage schedule table to display a yearly view
+	/**
+	 * 
+	 * <h1>Change Schedule View to Yearly</h1>
+	 * 
+	 * Get the latest yearly schedule data from the model and update
+	 * the table in schedule view to display this information. Also toggles
+	 * the buttons and table header to reflect the change.
+	 * 
+	 */
 	public void changeScheduleYear()
 	{
 		Object[][] data = theModel.returnScheduleInfo(true);
@@ -91,6 +131,14 @@ public class MortgageController {
 	
 	// sets the focus on the calculate button, triggered when
 	// the calculator view comes into focus
+	/**
+	 * <h1>Set Window Focus on Calculate Button</h1>
+	 * 
+	 * When the calculator view is in focus, the default
+	 * focus is set on the calculate button in order to
+	 * allow all the text field helper text to be viewable 
+	 * 
+	 */
 	public void setButtonFocus()
 	{
 		calcView.setButtonFocus();

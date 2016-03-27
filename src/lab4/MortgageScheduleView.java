@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
-* <h1>Payment Schedule View</h1>
+* <h1>Mortgage Payment Schedule View</h1>
 * This class creates the view for the separate mortgage schedule window
 * that displays the users payment schedule by month or by year
 *
@@ -38,9 +38,13 @@ public class MortgageScheduleView extends JFrame {
 	// duration String, set to default "Year"
 	private String duration = "Year";
 	
-	// Constructor
-	// sets up the payment schedule window with the default
-	// yearly view
+	/**
+	 * <h1>Constructor</h1>
+	 * 
+	 * sets up the payment schedule window with the default
+	 * yearly view
+	 * 
+	 */
 	public MortgageScheduleView()
 	{	
 		super("Mortgage Schedule");
@@ -55,9 +59,14 @@ public class MortgageScheduleView extends JFrame {
 		setUpPanel();
 		setUpTable();
 	}
-	
-	// toggle the duration value in the table header to
-	// month or year
+
+	/**
+	 * <h1>Update Duration in Table Header</h1>
+	 * 
+	 * toggle the duration value in the table header to
+	 * month or year
+	 * 
+	 */
 	public void updateDuration()
 	{
 		if (duration.equals("Year"))
@@ -65,9 +74,15 @@ public class MortgageScheduleView extends JFrame {
 		else
 			duration = "Year";
 	}
-	
-	// return a String array with the current duration variable
-	// used when updating the table
+
+	/**
+	 * <h1>Return Current Table Header</h1>
+	 * 
+	 * return a String array with the current duration variable
+	 * used when updating the table
+	 * 
+	 * @return columnNames
+	 */
 	public String[] getHeader()
 	{
 		String[] columnNames = {duration, "Blended Payment Amount",
@@ -78,8 +93,13 @@ public class MortgageScheduleView extends JFrame {
 		return columnNames;
 	}
 	
-	// toggle the change view button to reflect the
-	// current schedule state after action
+	/**
+	 * <h1>Update Change View Button</h1>
+	 * 
+	 * toggle the change view button to reflect the
+	 * current schedule state after action
+	 * 
+	 */
 	public void updateButton()
 	{
 		if(toggleView.getText().equals("View by Month"))
@@ -89,7 +109,12 @@ public class MortgageScheduleView extends JFrame {
 	}
 	
 	// Constructor Helper Methods
-	// set up main panel and add components
+	/**
+	 * <h1>Set Up Panel With Components</h1>
+	 * 
+	 * set up main panel and add components
+	 * 
+	 */
 	public void setUpPanel()
 	{
 		title = new JLabel("Mortgage Payment Schedule");
@@ -106,8 +131,13 @@ public class MortgageScheduleView extends JFrame {
 		scrollpane.setBorder(null);
 	    getContentPane().add(scrollpane);
 	}
-	
-	// set up table and create table components
+
+	/**
+	 * <h1>Set Up Table With Components</h1>
+	 * 
+	 * set up table and add components
+	 * 
+	 */
 	public void setUpTable()
 	{	
 		Object[][] data = {{"",""}};
@@ -124,10 +154,15 @@ public class MortgageScheduleView extends JFrame {
 
 	}
 	
-	// update table when either the view by month/year button is clicked, or
-	// when the calculator view schedule button is clicked
-	// new data is collected from the model, along with the current header
-	// values and these are updated in the view
+	/**
+	 * <h1>Update Table View With Latest Schedule Data</h1>
+	 * 
+	 * update table when either the view by month/year button is clicked, or
+	 * when the calculator view schedule button is clicked
+	 * new data is collected from the model, along with the current header
+	 * values and these are updated in the view
+	 * 
+	 */
 	public void updateTable(Object[][] data)
 	{
 			TableModel model = new DefaultTableModel(data, getHeader());
@@ -149,19 +184,45 @@ public class MortgageScheduleView extends JFrame {
 	}
 	
 	// Listener Add Methods
-	// methods to add necessary listeners to certain components, such as buttons
+	/**
+	 * <h1>Add Schedule Listener</h1>
+	 * 
+	 * adds listener to close button
+	 * 
+	 * @param scheduleListener
+	 */
 	public void addScheduleListener(ActionListener scheduleListener)
 	{
 		closeButton.addActionListener(scheduleListener);
 	}
 	
+	/**
+	 * <h1>Add Schedule View Listener</h1>
+	 * 
+	 * adds listener to toggleView button
+	 * 
+	 * @param scheduleListener
+	 */
 	public void addScheduleViewListener(ActionListener scheduleListener)
 	{
 		toggleView.addActionListener(scheduleListener);
 	}
-	
-	// GridBagLayout add helper method to ensure correct placement of new components
-	// onto the panel
+
+	/**
+	 * 
+	 * <h1>GridBagLayout Add Method</h1>
+	 * 
+	 * GridBagLayout add helper method to ensure correct placement of new components
+	 * onto the panel
+	 * 
+	 * @param p
+	 * @param c
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param align
+	 */
 	public void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
 	    GridBagConstraints gc = new GridBagConstraints();
 	    gc.gridx = x;
@@ -176,9 +237,14 @@ public class MortgageScheduleView extends JFrame {
 	    p.add(c, gc);
 	}
 	
-	// method to update JFrame with any
-	// panel adds or removes that may have
-	// taken place
+	/**
+	 * <h1>Refresh and Update JFrame</h1>
+	 * 
+	 * method to update JFrame with any
+	 * panel adds or removes that may have
+	 * taken place
+	 * 
+	 */
 	public void refreshFrame()
 	{
 		getContentPane().add(scrollpane);
@@ -187,7 +253,13 @@ public class MortgageScheduleView extends JFrame {
 		repaint();
 	}
 	
-	// display a JOptionPane error message
+	/**
+	 * <h1>Display Error Message</h1>
+	 * 
+	 * display a JOptionPane error message
+	 * 
+	 * @param errorMessage
+	 */
 	public void displayErrorMessage(String errorMessage)
 	{
 		JOptionPane.showMessageDialog(this, errorMessage);

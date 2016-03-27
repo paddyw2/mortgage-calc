@@ -18,16 +18,26 @@ public class WindowListener implements WindowFocusListener {
 	
 	private MortgageController controller;
 	
-	// constructor takes the controller as parameter and sets
-	// it as a variable to allow the listener to pass commands
-	// to the controller
+	/**
+	 * <h1>Constructor</h1>
+	 * constructor takes the controller as parameter and sets
+	 * it as a variable to allow the listener to pass commands
+	 * to the controller
+	 * 
+	 * @param controller
+	 */
 	public WindowListener(MortgageController controller)
 	{
 		this.controller = controller;
 	}
 
-	// when the calculator view is in focus, set the default
-	// focus to be on the calculate button
+	/**
+	 * <h1>Set Button Focus</h1>
+	 * 
+	 * when the calculator view is in focus, set the default
+	 * focus to be on the calculate button
+	 * 
+	 */
 	@Override
 	public void windowGainedFocus(WindowEvent arg0) {
 		controller.setButtonFocus();

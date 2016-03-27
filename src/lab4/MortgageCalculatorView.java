@@ -6,7 +6,7 @@ import java.awt.event.WindowFocusListener;
 import javax.swing.*;
 
 /**
-* <h1>Calculator View</h1>
+* <h1>Mortgage Calculator View</h1>
 * This class creates the view for the mortgage calculator window
 * that the user enters their information into
 *
@@ -51,8 +51,11 @@ public class MortgageCalculatorView extends JFrame {
 	private JPanel myPanel;
 	private ButtonGroup buttonGroup;
 
-	// Constructor
-	// class constructor, sets up the initial calculator view
+	/**
+	 * <h1>Constructor</h1>
+	 * class constructor, sets up the initial calculator view
+	 * 
+	 */
 	public MortgageCalculatorView()
 	{	
 		super("Mortgage Calculator");
@@ -68,28 +71,59 @@ public class MortgageCalculatorView extends JFrame {
 	}
 	
 	// Text Field Get Methods
-	// return the double value of each calculator text field
+	/**
+	 * <h1>Get firstField double value</h1>
+	 * 
+	 * return the double value of calculator text field
+	 * 
+	 * @return double
+	 */
 	public double getFirstNumber()
 	{
 		return Double.parseDouble(firstField.getText());
 	}
 	
+	/**
+	 * <h1>Get secondField double value</h1>
+	 * 
+	 * return the double value of calculator text field
+	 * 
+	 * @return double
+	 */
 	public double getSecondNumber()
 	{
 		return Double.parseDouble(secondField.getText());
 	}
 	
+	/**
+	 * <h1>Get thirdField double value</h1>
+	 * 
+	 * return the double value of calculator text field
+	 * 
+	 * @return double
+	 */
 	public double getThirdNumber()
 	{
 		return Double.parseDouble(thirdField.getText());
 	}
 	
+	/**
+	 * <h1>Get fourthField double value</h1>
+	 * 
+	 * return the double value of calculator text field
+	 * 
+	 * @return double
+	 */
 	public double getFourthNumber()
 	{
 		return Double.parseDouble(fourthField.getText());
 	}
-	
-	// show calculator components by adding them to the panel
+
+	/**
+	 * <h1>Show Calculator</h1>
+	 * show calculator components by adding them to the panel
+	 * 
+	 */
 	public void showCalculator()
 	{
 		setTextFieldValues();
@@ -104,7 +138,11 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
-	// hide calculator components by removing them from the panel
+	/**
+	 * <h1>Hide Calculator</h1>
+	 * hide calculator components by removing them from the panel
+	 * 
+	 */
 	public void hideCalculator()
 	{
 		setCalcButton("Reset");
@@ -119,7 +157,11 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
-	// show result components by adding them to the panel
+	/**
+	 * <h1>Show Result Labels</h1>
+	 * show result components by adding them to the panel
+	 * 
+	 */
 	public void showResults()
 	{
 		setCalcButton("Reset");
@@ -134,7 +176,11 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
-	// hide result components by removing them from the panel
+	/**
+	 * <h1>Hide Result Labels</h1>
+	 * hide result components by removing them from the panel
+	 * 
+	 */
 	public void hideResults()
 	{
 		myPanel.remove(resultOne);
@@ -147,52 +193,109 @@ public class MortgageCalculatorView extends JFrame {
 		myPanel.remove(scheduleButton);
 		refreshFrame();
 	}
-	
-	// clear check box selection
+
+	/**
+	 * <h1>Clear Text Box Selection</h1>
+	 * clear all check boxes
+	 * 
+	 */
 	public void resetCheckBoxes()
 	{
 		buttonGroup.clearSelection();
 	}
 	
 	// Result Label Setters
-	// set the string values of the result label components
+	/**
+	 * <h1>Set resultOne Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultOne(double result)
 	{
 		resultOne.setText("Blended Monthly Payment: $" + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultTwo Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultTwo(double result)
 	{
 		resultTwo.setText("Total Interest Paid: $" + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultThree Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultThree(double result)
 	{
 		resultThree.setText("Total Interest and Principle: $" + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultFour Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultFour(double result)
 	{
 		resultFour.setText("Interest/Principle Ratio: " + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultFive Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultFive(double result)
 	{
 		resultFive.setText("Average Interest per Year: $" + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultSix Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultSix(double result)
 	{
 		resultSix.setText("Average Interest per Month: $" + Double.toString(result));
 	}
 	
+	/**
+	 * <h1>Set resultSeven Label Text</h1>
+	 * set the string values of the result label component
+	 * 
+	 * @param result
+	 */
 	public void setResultSeven(double result)
 	{
 		resultSeven.setText("Ammortization, in Years: " + Double.toString(result));
 	}
 	
-	// GridBagLayout method for adding components to the panel, used instead of the simpler
-	// add() method
+	/**
+	 * <h1>GridBagLayout Add Method</h1>
+	 * 
+	 * GridBagLayout add helper method to ensure correct placement of new components
+	 * onto the panel
+	 * 
+	 * @param p
+	 * @param c
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param align
+	 */
 	public void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
 	    GridBagConstraints gc = new GridBagConstraints();
 	    gc.gridx = x;
@@ -207,13 +310,26 @@ public class MortgageCalculatorView extends JFrame {
 	    p.add(c, gc);
 	  }
 	
-	// set the String value of the calculate button
+	/**
+	 * <h1>Set the Calculate Button Text</h1>
+	 * 
+	 * set the String value of the calculate button
+	 * 
+	 * @param string
+	 */
 	public void setCalcButton(String string)
 	{
 		calculateButton.setText(string);
 	}
 	
-	// refresh the JFrame to update changes
+	/**
+	 * <h1>Refresh and Update JFrame</h1>
+	 * 
+	 * method to update JFrame with any
+	 * panel adds or removes that may have
+	 * taken place
+	 * 
+	 */
 	public void refreshFrame()
 	{
 		this.add(myPanel);
@@ -223,7 +339,12 @@ public class MortgageCalculatorView extends JFrame {
 	}
 
 	// Constructor Helper Methods
-	// set up text field values for main calculator
+	/**
+	 * <h1>Set Calculator Text Field Values</h1>
+	 * 
+	 * set up text field values for main calculator
+	 * 
+	 */
 	public void setTextFieldValues()
 	{
 		firstField.setName("firstField");
@@ -242,8 +363,13 @@ public class MortgageCalculatorView extends JFrame {
 		fourthField.setText("Compound Frequency");
 		fourthField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 	}
-	
-	// set up check box button group
+
+	/**
+	 * <h1>Set Up Check Box Button Group</h1>
+	 * 
+	 * add check boxes to the button group
+	 * 
+	 */
 	public void setUpButtonGroup()
 	{
 		addItem(myPanel, checkTitle, 2, 12, 1, 1, GridBagConstraints.NORTH);
@@ -253,12 +379,16 @@ public class MortgageCalculatorView extends JFrame {
 		addItem(myPanel, checkOne, 2, 14, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, checkTwo, 2, 16, 1, 1, GridBagConstraints.NORTH);
 		addItem(myPanel, checkThree, 2, 18, 1, 1, GridBagConstraints.NORTH);
-		//this.add(buttonGroup);
 		refreshFrame();
-		
 	}
 	
-	// return the boolean state of each check box
+	/**
+	 * <h1>Get checkOne Boolean Value</h1>
+	 * 
+	 * returns the boolean value of the check box
+	 * 
+	 * @return boolean
+	 */
 	public boolean getCheckOne()
 	{
 		if (checkOne.isSelected())
@@ -267,6 +397,13 @@ public class MortgageCalculatorView extends JFrame {
 			return false;
 	}
 	
+	/**
+	 * <h1>Get checkTwo Boolean Value</h1>
+	 * 
+	 * returns the boolean value of the check box
+	 * 
+	 * @return boolean
+	 */
 	public boolean getCheckTwo()
 	{
 		if (checkTwo.isSelected())
@@ -275,6 +412,13 @@ public class MortgageCalculatorView extends JFrame {
 			return false;
 	}
 	
+	/**
+	 * <h1>Get checkThree Boolean Value</h1>
+	 * 
+	 * returns the boolean value of the check box
+	 * 
+	 * @return boolean
+	 */
 	public boolean getCheckThree()
 	{
 		if (checkThree.isSelected())
@@ -283,8 +427,14 @@ public class MortgageCalculatorView extends JFrame {
 			return false;
 	}
 	
-	// return the desired double value, depending on which
-	// check box is selected
+	/**
+	 * <h1>Return the Double Value of the Check Box Group</h1>
+	 * 
+	 * each check box represents a different double payment
+	 * frequency, so return the corresponding value
+	 * 
+	 * @return double
+	 */
 	public double getCheckValue()
 	{
 		if (getCheckOne())
@@ -297,7 +447,12 @@ public class MortgageCalculatorView extends JFrame {
 			return -1.0;
 	}
 	
-	// reset calculator to default state
+	/**
+	 * <h1>Reset Calculator</h1>
+	 * 
+	 * reset calculator to default state
+	 * 
+	 */
 	public void resetCalculator()
 	{
 		hideResults();
@@ -313,18 +468,37 @@ public class MortgageCalculatorView extends JFrame {
 	}
 	
 	// Listener Add Methods
-	// these methods allow the necessary listeners to be added
-	// the appropriate components
+	/**
+	 * <h1>Add Calculation Listener</h1>
+	 * 
+	 * adds listener to calculateButton button
+	 * 
+	 * @param listenerForCalcButton
+	 */
 	public void addCalculationListener(ActionListener listenerForCalcButton)
 	{
 		calculateButton.addActionListener(listenerForCalcButton);
 	}
 	
+	/**
+	 * <h1>Add Schedule Listener</h1>
+	 * 
+	 * adds listener to scheduleButton button
+	 * 
+	 * @param scheduleListener
+	 */
 	public void addScheduleListener(ActionListener scheduleListener)
 	{
 		scheduleButton.addActionListener(scheduleListener);
 	}
 	
+	/**
+	 * <h1>Add Focus Listener</h1>
+	 * 
+	 * adds focus listener to all text fields
+	 * 
+	 * @param listenForFocus
+	 */
 	public void addFocusListener(FocusListener listenForFocus)
 	{
 		firstField.addFocusListener(listenForFocus);
@@ -333,12 +507,25 @@ public class MortgageCalculatorView extends JFrame {
 		fourthField.addFocusListener(listenForFocus);
 	}
 	
+	/**
+	 * <h1>Add Window Focus Listener</h1>
+	 * 
+	 * adds window focus listener to window
+	 * 
+	 * @param windowListener
+	 */
 	public void addWinFocusListener(WindowFocusListener windowListener)
 	{
 		this.addWindowFocusListener(windowListener);
 	}
 	
-	// display a JOptionPane error message
+	/**
+	 * <h1>Display Error Message</h1>
+	 * 
+	 * display a JOptionPane error message
+	 * 
+	 * @param errorMessage
+	 */
 	public void displayErrorMessage(String errorMessage)
 	{
 		JOptionPane.showMessageDialog(this, errorMessage);

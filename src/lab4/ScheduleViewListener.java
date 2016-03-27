@@ -19,17 +19,27 @@ public class ScheduleViewListener implements ActionListener {
 
 	private MortgageController theController;
 	
-	// constructor takes the controller as parameter and sets
-	// it as a variable to allow the listener to pass commands
-	// to the controller
+	/**
+	 * <h1>Constructor</h1>
+	 * constructor takes the controller as parameter and sets
+	 * it as a variable to allow the listener to pass commands
+	 * to the controller
+	 * 
+	 * @param controller
+	 */
 	public ScheduleViewListener(MortgageController controller)
 	{
 		theController = controller;
 	}
 	
-	// when button is clicked, if it reads "View by Month" then
-	// show yearly schedule and change the text
-	// if not, show monthly schedule and change the text
+	/**
+	 * <h1>Change Payment Schedule by Month or Year</h1>
+	 * 
+	 * when button is clicked, if it reads "View by Month" then
+	 * show yearly schedule and change the text
+	 * if not, show monthly schedule and change the text
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

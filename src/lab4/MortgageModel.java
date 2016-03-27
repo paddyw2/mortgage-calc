@@ -5,11 +5,12 @@ import java.lang.Math;
 /**
 * <h1>Mortgage Model</h1>
 * This class holds the mortgage data, and performs calculations on this data
-* 
-* Two main methods:
+* <br>
+* Two key methods:
+* <br>
 * 1) calculateMortgageValues: This method takes the values entered by the user and sets
 * the variables to the appropriate values using the mortgage formula
-* 
+* <br>
 * 2) returnScheduleInfo: This method returns a data object filled with either monthly or
 * yearly payment information, depending on boolean parameter
 *
@@ -35,7 +36,17 @@ public class MortgageModel {
 	private double monthlyPayments;
 	
 	// uses the interest factor formula to set the current interestFactor
+	
 	public void calculateInterestFactor(double interestRate)
+	/**
+	 * <h1>Calculate Interest Factor</h1>
+	 * 
+	 * This method takes the raw interestRate as a parameter and sets the
+	 * appropriate interestFactor using the interestFactor formula
+	 * 
+	 * @param double
+	 * 
+	 */
 	{
 		double rate = interestRate / 100.0;
 		interestFactor = Math.pow(((rate/compFreq)+1), (compFreq/payFreq)) - 1;
@@ -69,42 +80,85 @@ public class MortgageModel {
 	}
 	
 	// round a double value to two decimal places
+	/**
+	 * <h1>Round doubles to two decimal places</h1>
+	 * This is a helper method that rounds the value double parameter
+	 * to two decimal places
+	 * 
+	 * @param value
+	 * @return value, rounded to 2 decimal places
+	 */
 	public double round(double value)
 	{
 		return (Math.round(value * 100.0) / 100.0);
 	}
 	
 	// return mortgage values, rounded to two decimal places
+	/**
+	 * Returns blendedMonthlyPayment to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getMonthlyPayment()
 	{
 		return round(blendedMonthlyPayment);
 	}
 	
+	/**
+	 * Returns totalInterestPaid to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getInterestPaid()
 	{
 		return round(totalInterestPaid);
 	}
 	
+	/**
+	 * Returns totalInterestPrinciple to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getInterestPrinciple()
 	{
 		return round(totalInterestPrinciple);
 	}
 	
+	/**
+	 * Returns interestPrincipleRatio to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getInterestPrincipleRatio()
 	{
 		return round(interestPrincipleRatio);
 	}
 	
+	/**
+	 * Returns averageInterestYear to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getInterestYear()
 	{
 		return round(averageInterestYear);
 	}
 	
+	/**
+	 * Returns averageInterestMonth to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getInterestMonth()
 	{
 		return round(averageInterestMonth);
 	}
 	
+	/**
+	 * Returns amortizationYears to two decimal places
+	 * 
+	 * @return double
+	 */
 	public double getAmmortization()
 	{
 		return round(amortizationYears);
