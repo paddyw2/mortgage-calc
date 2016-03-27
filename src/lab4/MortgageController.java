@@ -160,7 +160,6 @@ public class MortgageController {
 			calcView.displayErrorMessage("You need to enter four values");
 			calcView.resetCalculator();
 		}
-		
 	}
 	
 	// changes the view back to the default calculator
