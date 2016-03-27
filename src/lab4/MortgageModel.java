@@ -34,19 +34,18 @@ public class MortgageModel {
 	private double payFreq;
 	private double principle;
 	private double monthlyPayments;
+	private double totalPayments;
 	
-	// uses the interest factor formula to set the current interestFactor
-	
-	public void calculateInterestFactor(double interestRate)
 	/**
 	 * <h1>Calculate Interest Factor</h1>
 	 * 
 	 * This method takes the raw interestRate as a parameter and sets the
 	 * appropriate interestFactor using the interestFactor formula
 	 * 
-	 * @param double
+	 * @param interestRate
 	 * 
 	 */
+	public void calculateInterestFactor(double interestRate)
 	{
 		double rate = interestRate / 100.0;
 		interestFactor = Math.pow(((rate/compFreq)+1), (compFreq/payFreq)) - 1;
@@ -65,14 +64,15 @@ public class MortgageModel {
 	{
 		// set variables to parameter values
 		monthlyPayments = payMonths;
+		totalPayments = payMonths * (freq / 12);
 		principle = principleAmount;
 		compFreq = comp;
 		payFreq = freq;
 		calculateInterestFactor(interestRate);
 		// set mortgage payment variables, based on the mortgage formula
-		blendedMonthlyPayment = (principle * interestFactor) / (1 - (Math.pow((interestFactor + 1), (monthlyPayments*-1))));
-		totalInterestPaid = (blendedMonthlyPayment * monthlyPayments)  - principle;
-		totalInterestPrinciple = blendedMonthlyPayment * monthlyPayments;
+		blendedMonthlyPayment = (principle * interestFactor) / (1 - (Math.pow((interestFactor + 1), (totalPayments*-1))));
+		totalInterestPaid = (blendedMonthlyPayment * totalPayments)  - principle;
+		totalInterestPrinciple = blendedMonthlyPayment * totalPayments;
 		interestPrincipleRatio = totalInterestPaid / principle;
 		averageInterestYear = totalInterestPaid / (monthlyPayments / 12);
 		averageInterestMonth = totalInterestPaid / monthlyPayments;
@@ -189,7 +189,7 @@ public class MortgageModel {
 		// variables
 		double currentTotal = principle;
 		double totalPaid = 0;
-		double blended = getMonthlyPayment();
+		double blended = getMonthlyPayment() * (payFreq / 12);
 		double principlePortion = 0;
 		double interest, yearlyPrinciple, yearlyInterest = 0;
 		

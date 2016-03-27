@@ -19,7 +19,7 @@ public class MortgageCalculatorView extends JFrame {
 
 	// field width and frame constants
 	private final int FIELD_WIDTH = 15;
-	private final int FRAME_WIDTH = 250;
+	private final int FRAME_WIDTH = 280;
 	private final int FRAME_HEIGHT = 350;
 	private final int LOCATION = 150;
 	
@@ -211,9 +211,9 @@ public class MortgageCalculatorView extends JFrame {
 	 * 
 	 * @param result
 	 */
-	public void setResultOne(double result)
+	public void setResultOne(double result, String schedule)
 	{
-		resultOne.setText("Blended Monthly Payment: $" + Double.toString(result));
+		resultOne.setText("Blended " + schedule + " Payment: $" + Double.toString(result));
 	}
 	
 	/**

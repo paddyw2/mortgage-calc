@@ -63,13 +63,13 @@ public class MortgageController {
 		
 		// if amortization less than 12 months, show monthly by default
 		if (data[0][0].equals("Error")) {
-			changeScheduleMonth();
+			changeSchedule(false);
 		} else {
-			changeScheduleYear();
+			scheduleView.updateTable(data);
+			scheduleView.setVisible(true);
 		}
 	}
 	
-	// hides the mortgage schedule window
 	/**
 	 * <h1>Hide Mortgage Schedule View</h1>
 	 * 
@@ -81,31 +81,6 @@ public class MortgageController {
 		scheduleView.setVisible(false);
 	}
 	
-	// updates the mortgage schedule table to display a monthly view
-	/**
-	 * 
-	 * <h1>Change Schedule View to Monthly</h1>
-	 * 
-	 * Get the latest monthly schedule data from the model and update
-	 * the table in schedule view to display this information. Also toggles
-	 * the buttons and table header to reflect the change.
-	 * 
-	 */
-	public void changeScheduleMonth()
-	{
-		Object[][] data = theModel.returnScheduleInfo(false);
-		// should never occur, but check for error just in case
-		if (data[0][0].equals("Error")) {
-			System.out.println("An error has occured in changeScheduleMonth()");
-			return;
-		}
-		scheduleView.updateDuration();
-		scheduleView.updateButton();
-		scheduleView.updateTable(data);
-		scheduleView.setVisible(true);
-	}
-	
-	// updates the mortgage schedule table to display a yearly view
 	/**
 	 * 
 	 * <h1>Change Schedule View to Yearly</h1>
@@ -115,9 +90,9 @@ public class MortgageController {
 	 * the buttons and table header to reflect the change.
 	 * 
 	 */
-	public void changeScheduleYear()
+	public void changeSchedule(boolean year)
 	{
-		Object[][] data = theModel.returnScheduleInfo(true);
+		Object[][] data = theModel.returnScheduleInfo(year);
 		// if amortization is less than 12 months, show error and return
 		if (data[0][0].equals("Error")) {
 			scheduleView.displayErrorMessage("Amortization period not long enough for yearly schedule");
@@ -129,8 +104,6 @@ public class MortgageController {
 		scheduleView.setVisible(true);
 	}
 	
-	// sets the focus on the calculate button, triggered when
-	// the calculator view comes into focus
 	/**
 	 * <h1>Set Window Focus on Calculate Button</h1>
 	 * 
@@ -160,6 +133,7 @@ public class MortgageController {
 		double monthlyPayment, totalInterest, interestPrinciple;
 		double interestPrincipleRatio, interestYear, interestMonth, amortization;
 		double checkValue;
+		String blendedSchedule;
 		
 		// an error will occur if the user does not enter a double value
 		// in which case an error message will be shown
@@ -175,6 +149,12 @@ public class MortgageController {
 			if (checkValue < 0) {
 				calcView.displayErrorMessage("Please check an option");
 				return;
+			} else if(checkValue == 52) {
+				blendedSchedule = "Weekly";
+			} else if(checkValue == 26) {
+				blendedSchedule = "Bi-Weekly";
+			} else {
+				blendedSchedule = "Monthly";
 			}
 			
 			// calculate values
@@ -190,7 +170,7 @@ public class MortgageController {
 			amortization = theModel.getAmmortization();
 
 			// set the new values in the view
-			calcView.setResultOne(monthlyPayment);
+			calcView.setResultOne(monthlyPayment, blendedSchedule);
 			calcView.setResultTwo(totalInterest);
 			calcView.setResultThree(interestPrinciple);
 			calcView.setResultFour(interestPrincipleRatio);
@@ -209,8 +189,13 @@ public class MortgageController {
 			calcView.resetCalculator();
 		}
 	}
-	
-	// changes the view back to the default calculator
+
+	/**
+	 * <h1>Reset Calculator</h1>
+	 * 
+	 * changes the view back to the default calculator
+	 * 
+	 */
 	public void resetCalculator()
 	{
 		calcView.resetCalculator();

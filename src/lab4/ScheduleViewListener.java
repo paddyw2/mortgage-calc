@@ -46,8 +46,8 @@ public class ScheduleViewListener implements ActionListener {
 		JButton source = (JButton) e.getSource();
 		
 		if (source.getText().equals("View by Month"))
-			theController.changeScheduleMonth();
+			theController.changeSchedule(false);
 		else
-			theController.changeScheduleYear();
+			theController.changeSchedule(true);
 	}
 }
