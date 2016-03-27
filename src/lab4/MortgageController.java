@@ -89,6 +89,8 @@ public class MortgageController {
 	 * the table in schedule view to display this information. Also toggles
 	 * the buttons and table header to reflect the change.
 	 * 
+	 * @param year
+	 * 
 	 */
 	public void changeSchedule(boolean year)
 	{
