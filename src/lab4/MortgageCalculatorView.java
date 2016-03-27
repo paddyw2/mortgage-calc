@@ -1,16 +1,23 @@
 package lab4;
-
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowFocusListener;
-
 import javax.swing.*;
+
+/**
+* <h1>Calculator View</h1>
+* This class creates the view for the mortgage calculator window
+* that the user enters their information into
+*
+* @author  Patrick Withams
+* @version 1.0
+* @since   2016-03-26
+*/
 
 public class MortgageCalculatorView extends JFrame {
 
-	// field width constant
+	// field width and frame constants
 	private final int FIELD_WIDTH = 15;
 	private final int FRAME_WIDTH = 250;
 	private final int FRAME_HEIGHT = 350;
@@ -40,15 +47,12 @@ public class MortgageCalculatorView extends JFrame {
 	private JCheckBox checkTwo = new JCheckBox("Bi-Weekly");
 	private JCheckBox checkThree = new JCheckBox("Monthly");
 	
-	// panel
+	// main panel and button group
 	private JPanel myPanel;
-	// button group
 	private ButtonGroup buttonGroup;
-	/**
-	 * 
-	 * constructor that sets up initial view
-	 * 
-	 */
+
+	// Constructor
+	// class constructor, sets up the initial calculator view
 	public MortgageCalculatorView()
 	{	
 		super("Mortgage Calculator");
@@ -57,21 +61,14 @@ public class MortgageCalculatorView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setLocation(LOCATION,LOCATION);
-
 		myPanel.setLayout(new GridBagLayout());
+		
 		// show calculator as initial view
 		showCalculator();
-		
-		//calculateButton.grabFocus();
 	}
 	
-	/**
-	 * 
-	 * get contents of input fields
-	 * 
-	 * @return int
-	 */
-	
+	// Text Field Get Methods
+	// return the double value of each calculator text field
 	public double getFirstNumber()
 	{
 		return Double.parseDouble(firstField.getText());
@@ -92,13 +89,7 @@ public class MortgageCalculatorView extends JFrame {
 		return Double.parseDouble(fourthField.getText());
 	}
 	
-	/**
-	 * 
-	 * Show/hide calculator
-	 * 
-	 */
-	
-	
+	// show calculator components by adding them to the panel
 	public void showCalculator()
 	{
 		setTextFieldValues();
@@ -113,6 +104,7 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
+	// hide calculator components by removing them from the panel
 	public void hideCalculator()
 	{
 		setCalcButton("Reset");
@@ -127,12 +119,7 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
-	/**
-	 * 
-	 * Show/hide results
-	 * 
-	 */
-	
+	// show result components by adding them to the panel
 	public void showResults()
 	{
 		setCalcButton("Reset");
@@ -147,6 +134,7 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
+	// hide result components by removing them from the panel
 	public void hideResults()
 	{
 		myPanel.remove(resultOne);
@@ -160,18 +148,14 @@ public class MortgageCalculatorView extends JFrame {
 		refreshFrame();
 	}
 	
+	// clear check box selection
 	public void resetCheckBoxes()
 	{
 		buttonGroup.clearSelection();
 	}
 	
-	/**
-	 * 
-	 * set the text field of each result label
-	 * 
-	 * @param result
-	 */
-	
+	// Result Label Setters
+	// set the string values of the result label components
 	public void setResultOne(double result)
 	{
 		resultOne.setText("Blended Monthly Payment: $" + Double.toString(result));
@@ -207,11 +191,8 @@ public class MortgageCalculatorView extends JFrame {
 		resultSeven.setText("Ammortization, in Years: " + Double.toString(result));
 	}
 	
-	/**
-	 * 
-	 * layout methods
-	 * 
-	 */
+	// GridBagLayout method for adding components to the panel, used instead of the simpler
+	// add() method
 	public void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
 	    GridBagConstraints gc = new GridBagConstraints();
 	    gc.gridx = x;
@@ -226,22 +207,13 @@ public class MortgageCalculatorView extends JFrame {
 	    p.add(c, gc);
 	  }
 	
-	/**
-	 * 
-	 * helper methods
-	 * 
-	 * set main button text value
-	 * refreshing the JFrame
-	 * setting input field default values
-	 * 
-	 * @return int
-	 */
-
+	// set the String value of the calculate button
 	public void setCalcButton(String string)
 	{
 		calculateButton.setText(string);
 	}
 	
+	// refresh the JFrame to update changes
 	public void refreshFrame()
 	{
 		this.add(myPanel);
@@ -250,6 +222,8 @@ public class MortgageCalculatorView extends JFrame {
 		repaint();
 	}
 
+	// Constructor Helper Methods
+	// set up text field values for main calculator
 	public void setTextFieldValues()
 	{
 		firstField.setName("firstField");
@@ -269,6 +243,7 @@ public class MortgageCalculatorView extends JFrame {
 		fourthField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 	}
 	
+	// set up check box button group
 	public void setUpButtonGroup()
 	{
 		addItem(myPanel, checkTitle, 2, 12, 1, 1, GridBagConstraints.NORTH);
@@ -283,6 +258,7 @@ public class MortgageCalculatorView extends JFrame {
 		
 	}
 	
+	// return the boolean state of each check box
 	public boolean getCheckOne()
 	{
 		if (checkOne.isSelected())
@@ -307,6 +283,8 @@ public class MortgageCalculatorView extends JFrame {
 			return false;
 	}
 	
+	// return the desired double value, depending on which
+	// check box is selected
 	public double getCheckValue()
 	{
 		if (getCheckOne())
@@ -319,6 +297,7 @@ public class MortgageCalculatorView extends JFrame {
 			return -1.0;
 	}
 	
+	// reset calculator to default state
 	public void resetCalculator()
 	{
 		hideResults();
@@ -326,17 +305,16 @@ public class MortgageCalculatorView extends JFrame {
 		resetCheckBoxes();
 	}
 	
+	// set component focus on the calculate button, allowing
+	// the text field helper text to be seen
 	public void setButtonFocus()
 	{
 		calculateButton.requestFocusInWindow();
 	}
 	
-	/**
-	 * 
-	 * add action listener to button
-	 * 
-	 * @param listenerForCalcButton
-	 */
+	// Listener Add Methods
+	// these methods allow the necessary listeners to be added
+	// the appropriate components
 	public void addCalculationListener(ActionListener listenerForCalcButton)
 	{
 		calculateButton.addActionListener(listenerForCalcButton);
@@ -360,13 +338,7 @@ public class MortgageCalculatorView extends JFrame {
 		this.addWindowFocusListener(windowListener);
 	}
 	
-	/**
-	 * 
-	 * error message message
-	 * 
-	 * @param errorMessage
-	 */
-	
+	// display a JOptionPane error message
 	void displayErrorMessage(String errorMessage)
 	{
 		JOptionPane.showMessageDialog(this, errorMessage);
