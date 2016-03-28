@@ -42,7 +42,7 @@ public class MortgageCalculatorView extends JFrame {
 	private JButton scheduleButton = new JButton("View Schedule");
 	
 	// check boxes
-	private JLabel checkTitle = new JLabel("Choose Payment Schedule");
+	private JLabel checkTitle = new JLabel("Choose Payment Frequency:");
 	private JCheckBox checkOne = new JCheckBox("Weekly");
 	private JCheckBox checkTwo = new JCheckBox("Bi-Weekly");
 	private JCheckBox checkThree = new JCheckBox("Monthly");
@@ -349,18 +349,22 @@ public class MortgageCalculatorView extends JFrame {
 	{
 		firstField.setName("firstField");
 		firstField.setText("Ammortization, in Months");
+		firstField.setToolTipText("For a five year period, enter 60 (5x12)");
 		firstField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		
 		secondField.setName("secondField");
-		secondField.setText("Total Amount Loaned");
+		secondField.setText("Total Amount Loaned ($)");
+		secondField.setToolTipText("Total value of loaned amount in dollars, for example 200000");
 		secondField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		
 		thirdField.setName("thirdField");
 		thirdField.setText("Annual Interest Rate (%)");
+		thirdField.setToolTipText("Enter interest rate as percentage, for example 4.5");
 		thirdField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		
 		fourthField.setName("fourthField");
 		fourthField.setText("Compound Frequency");
+		fourthField.setToolTipText("For mortgages, this is usually semi anually, so 2");
 		fourthField.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 	}
 

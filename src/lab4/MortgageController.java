@@ -64,6 +64,10 @@ public class MortgageController {
 		// if amortization less than 12 months, show monthly by default
 		if (data[0][0].equals("Error")) {
 			changeSchedule(false);
+		} else if(data[0][0].equals("Input Error")) {
+			calcView.displayErrorMessage("Not enough data for an amortization schedule");
+			return;
+			
 		} else {
 			scheduleView.updateTable(data);
 			scheduleView.setVisible(true);

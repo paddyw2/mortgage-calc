@@ -231,13 +231,16 @@ public class MortgageModel {
 				yearlyInterest = 0;
 			}
 		}
-		
+		// if invalid numbers have been entered, show an input error
 		// if yearly has been requested, and the amortization period is
-		// less than a year, show an error
-		if ((amortizationYears < 1) && perYear) {
+		// less than a year, show a regular error
+		if ((amortizationYears * 12) < 1) {
+			mainData[0][0] = "Input Error";
+			return mainData;
+		} else if ((amortizationYears < 1) && perYear) {
 			mainData[0][0] = "Error";
 			return mainData;
-		}
+		} 
 		
 		// if perYear boolean is asking for yearly data, return it
 		// otherwise, return monthly data
