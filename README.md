@@ -4,4 +4,4 @@
 To run this application:
 
  * Change to the bin directory
- * Run application from bin using java lab4.MVCMortgage
+ * Run application from bin using <code>java lab4.MVCMortgage</code>
